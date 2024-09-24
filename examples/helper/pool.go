@@ -14,6 +14,33 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
+func GetPairAddress(client *ethclient.Client, token0, token1 common.Address) (common.Address, error) {
+	f, err := contract.NewUniswapv2Factory(common.HexToAddress(ContractV2Factory), client)
+	if err != nil {
+		return common.Address{}, err
+	}
+	pairAddr, err := f.GetPair(nil, token0, token1)
+	if err != nil {
+		return common.Address{}, err
+	}
+	if pairAddr == (common.Address{}) {
+		return common.Address{}, errors.New("pair is not exist")
+	}
+	return pairAddr, nil
+
+}
+
+//func ConstructV2Pool(client *ethclient.Client, token0, token1 *coreEntities.Token) (*entities.Pool, error) {
+//	poolAddress, err := GetPairAddress(client, token0.Address, token1.Address)
+//	if err != nil {
+//		return nil, err
+//	}
+//	contractFactory, err := contract.NewUniswapv2Factory(poolAddress, client)
+//	if err != nil {
+//		return nil, err
+//	}
+//}
+
 func GetPoolAddress(client *ethclient.Client, token0, token1 common.Address, fee *big.Int) (common.Address, error) {
 	f, err := contract.NewUniswapv3Factory(common.HexToAddress(ContractV3Factory), client)
 	if err != nil {
