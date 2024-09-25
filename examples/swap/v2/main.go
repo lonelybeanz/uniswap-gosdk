@@ -17,6 +17,8 @@ var MOODENG = coreEntities.NewToken(1, common.HexToAddress("0x28561b8a2360f46301
 
 var MISHA = coreEntities.NewToken(1, common.HexToAddress("0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098"), 9, "MISHA", "MISHA")
 
+var MARS = coreEntities.NewToken(1, common.HexToAddress("0xb8d6196d71cdd7d90a053a7769a077772aaac464"), 9, "MARS", "MARS")
+
 func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 }
@@ -32,8 +34,8 @@ func main() {
 		log.Fatal("init wallet failed")
 	}
 
-	token := BOBA
-	tx, err := helper.SwapExactETHForTokens(client, wallet, token, "0.5")
+	token := MARS
+	tx, err := helper.SwapExactETHForTokens(client, wallet, token, "0.01")
 	if err != nil {
 		log.Fatal(err)
 	}

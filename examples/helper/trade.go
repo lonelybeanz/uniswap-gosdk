@@ -28,6 +28,8 @@ func initSwap(client *ethclient.Client, w *Wallet) (*contract.Uniswapv2RouterV2,
 	if err != nil {
 		return nil, nil, err
 	}
+	//增加10%
+	gasPrice = IntWithDecimal(gasPrice.Uint64()*15/10, 0)
 	fmt.Printf("gasPrice=%d\n", gasPrice.Uint64())
 
 	nonce, err := client.NonceAt(context.Background(), w.PublicKey, nil)
