@@ -56,7 +56,7 @@ func initSwap(client *ethclient.Client, w *Wallet) (*contract.Uniswapv2RouterV2,
 	opts.Value = big.NewInt(0)
 	opts.GasLimit = uint64(3000000)
 	opts.GasFeeCap = gasPrice //big.NewInt(18 * 1e9)
-	opts.GasTipCap = big.NewInt(0)
+	opts.GasTipCap = big.NewInt(0.1)
 
 	return uniswapv2RouterV2, opts, nil
 }
