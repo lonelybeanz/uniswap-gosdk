@@ -4,6 +4,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"math/big"
+	"time"
+
 	coreEntities "github.com/daoleno/uniswap-sdk-core/entities"
 	"github.com/daoleno/uniswapv3-sdk/examples/contract"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -11,8 +14,6 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"math/big"
-	"time"
 )
 
 func initSwap(client *ethclient.Client, w *Wallet) (*contract.Uniswapv2RouterV2, *bind.TransactOpts, error) {
@@ -56,7 +57,7 @@ func initSwap(client *ethclient.Client, w *Wallet) (*contract.Uniswapv2RouterV2,
 	opts.Value = big.NewInt(0)
 	opts.GasLimit = uint64(3000000)
 	opts.GasFeeCap = gasPrice //big.NewInt(18 * 1e9)
-	opts.GasTipCap = big.NewInt(0.1)
+	opts.GasTipCap = big.NewInt(1)
 
 	return uniswapv2RouterV2, opts, nil
 }
