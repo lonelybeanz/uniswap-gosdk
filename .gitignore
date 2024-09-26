@@ -2,3 +2,4 @@
 .idea
 periphery/.DS_Store
 periphery/contracts/.DS_Store
+.vscode/launch.json

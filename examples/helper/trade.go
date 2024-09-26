@@ -17,7 +17,8 @@ import (
 )
 
 func initSwap(client *ethclient.Client, w *Wallet) (*contract.Uniswapv2RouterV2, *bind.TransactOpts, error) {
-	uniswapv2RouterV2, err := contract.NewUniswapv2RouterV2(common.HexToAddress(ContractV2SwapRouterV2), client)
+	routeAddress := common.HexToAddress(ContractV2SwapRouterV2)
+	uniswapv2RouterV2, err := contract.NewUniswapv2RouterV2(routeAddress, client)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -54,10 +55,9 @@ func initSwap(client *ethclient.Client, w *Wallet) (*contract.Uniswapv2RouterV2,
 		Context: context.Background(),
 		Nonce:   big.NewInt(int64(nonce)),
 	}
-	opts.Value = big.NewInt(0)
-	opts.GasLimit = uint64(3000000)
-	opts.GasFeeCap = gasPrice //big.NewInt(18 * 1e9)
-	opts.GasTipCap = big.NewInt(1)
+
+	opts.GasLimit = 0
+	opts.GasTipCap = big.NewInt(2e9)
 
 	return uniswapv2RouterV2, opts, nil
 }
